@@ -1,1 +1,1 @@
-# EHECCourseFinder
+# TestCourseFinder
