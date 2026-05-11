@@ -1,9 +1,17 @@
 const authScreen = document.getElementById("auth-screen");
 const appMain = document.getElementById("app-main");
 const authMessage = document.getElementById("auth-message");
-const loginForm = document.getElementById("login-form");
-const signupForm = document.getElementById("signup-form");
+const authForm = document.getElementById("auth-form");
+const nameGroup = document.getElementById("name-group");
+const authName = document.getElementById("auth-name");
+const authEmail = document.getElementById("auth-email");
+const authPassword = document.getElementById("auth-password");
+const authSubmit = document.getElementById("auth-submit");
+const authToggle = document.getElementById("auth-toggle");
+const authToggleLabel = document.getElementById("auth-toggle-label");
 const logoutButton = document.getElementById("logout-button");
+
+let authMode = "signin";
 
 const courseGrid = document.getElementById("courses");
 const universitySearch = document.getElementById("university-search");
@@ -376,20 +384,35 @@ const resetFilters = () => {
 
 resetButton.addEventListener("click", resetFilters);
 
-loginForm.addEventListener("submit", async (event) => {
-  event.preventDefault();
-  await submitAuthForm("/auth/login", {
-    email: document.getElementById("login-email").value,
-    password: document.getElementById("login-password").value,
-  });
+const syncAuthModeUI = () => {
+  const isSignUp = authMode === "signup";
+  nameGroup.hidden = !isSignUp;
+  authName.required = isSignUp;
+  authSubmit.textContent = isSignUp ? "Sign up" : "Sign in";
+  authToggleLabel.textContent = isSignUp ? "Already have an account?" : "No account?";
+  authToggle.textContent = isSignUp ? "Sign in" : "Sign up";
+};
+
+authToggle.addEventListener("click", () => {
+  authMode = authMode === "signin" ? "signup" : "signin";
+  updateAuthMessage("Use Google OAuth or email/password.");
+  syncAuthModeUI();
 });
 
-signupForm.addEventListener("submit", async (event) => {
+authForm.addEventListener("submit", async (event) => {
   event.preventDefault();
-  await submitAuthForm("/auth/signup", {
-    name: document.getElementById("signup-name").value,
-    email: document.getElementById("signup-email").value,
-    password: document.getElementById("signup-password").value,
+  if (authMode === "signup") {
+    await submitAuthForm("/auth/signup", {
+      name: authName.value,
+      email: authEmail.value,
+      password: authPassword.value,
+    });
+    return;
+  }
+
+  await submitAuthForm("/auth/login", {
+    email: authEmail.value,
+    password: authPassword.value,
   });
 });
 
@@ -398,4 +421,5 @@ logoutButton.addEventListener("click", async () => {
   showAuth();
 });
 
+syncAuthModeUI();
 checkAuth();

@@ -50,20 +50,37 @@
 -->
     <section id="auth-screen" class="auth-screen">
       <div class="auth-card">
-        <h2>Login to Course Finder</h2>
+        <div class="auth-logo" aria-hidden="true">○</div>
+        <h2 class="auth-title">Acme industries</h2>
+
+        <a href="/auth/google" class="google-button">Sign in with google</a>
+
+        <div class="auth-divider"><span>or</span></div>
+
+        <form id="auth-form" class="auth-form">
+          <div id="name-group" class="auth-field" hidden>
+            <label for="auth-name">Full Name</label>
+            <input id="auth-name" type="text" placeholder="John Doe" />
+          </div>
+
+          <div class="auth-field">
+            <label for="auth-email">Email</label>
+            <input id="auth-email" type="email" placeholder="john@example.com" required />
+          </div>
+
+          <div class="auth-field">
+            <label for="auth-password">Password</label>
+            <input id="auth-password" type="password" placeholder="********" required />
+          </div>
+
+          <button id="auth-submit" type="submit" class="auth-submit">Sign in</button>
+        </form>
+
         <p id="auth-message">Use Google OAuth or email/password.</p>
-        <form id="login-form" class="auth-form">
-          <input id="login-email" type="email" placeholder="Email ID" required />
-          <input id="login-password" type="password" placeholder="Password" required />
-          <button type="submit" class="primary-button">Login</button>
-        </form>
-        <form id="signup-form" class="auth-form">
-          <input id="signup-name" type="text" placeholder="Full Name" required />
-          <input id="signup-email" type="email" placeholder="Email ID" required />
-          <input id="signup-password" type="password" placeholder="Password (min 6 chars)" required />
-          <button type="submit" class="secondary-button">Sign Up</button>
-        </form>
-        <a href="/auth/google" class="google-button">Continue with Google</a>
+        <p class="auth-toggle-text">
+          <span id="auth-toggle-label">No account?</span>
+          <button id="auth-toggle" type="button" class="auth-toggle-button">Sign up</button>
+        </p>
       </div>
     </section>
 
