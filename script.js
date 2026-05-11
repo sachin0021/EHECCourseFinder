@@ -9,6 +9,7 @@ const authPassword = document.getElementById("auth-password");
 const authSubmit = document.getElementById("auth-submit");
 const authToggle = document.getElementById("auth-toggle");
 const authToggleLabel = document.getElementById("auth-toggle-label");
+const googleAuthButton = document.getElementById("google-auth-button");
 const logoutButton = document.getElementById("logout-button");
 
 let authMode = "signin";
@@ -389,6 +390,9 @@ const syncAuthModeUI = () => {
   nameGroup.hidden = !isSignUp;
   authName.required = isSignUp;
   authSubmit.textContent = isSignUp ? "Sign up" : "Sign in";
+  googleAuthButton.textContent = isSignUp
+    ? "Sign up with google"
+    : "Sign in with google";
   authToggleLabel.textContent = isSignUp ? "Already have an account?" : "No account?";
   authToggle.textContent = isSignUp ? "Sign in" : "Sign up";
 };

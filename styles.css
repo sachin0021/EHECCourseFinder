@@ -425,3 +425,50 @@ main {
 .auth-toggle-text { color: #c3c7cf; }
 .auth-toggle-button { background:none; border:none; color:#fff; font-weight:600; cursor:pointer; }
 #auth-message { color: #c3c7cf; }
+
+/* Restore original light palette for auth card */
+.auth-screen {
+  background: var(--italy-gray);
+}
+
+.auth-card {
+  background: #ffffff;
+  border: 1px solid var(--border);
+  color: var(--ink);
+}
+
+.auth-title {
+  color: var(--ink);
+}
+
+.google-button {
+  background: #ffffff;
+  border: 1px solid var(--border);
+  color: var(--ink);
+}
+
+.auth-divider,
+.auth-toggle-text,
+#auth-message {
+  color: var(--muted);
+}
+
+.auth-divider::before,
+.auth-divider::after {
+  background: var(--border);
+}
+
+.auth-field label {
+  color: var(--ink);
+}
+
+.auth-field input {
+  background: #ffffff;
+  border: 1px solid var(--border);
+  color: var(--ink);
+}
+
+.auth-submit {
+  font-size: 1.2rem;
+  padding: 10px;
+}
