@@ -472,3 +472,11 @@ main {
   font-size: 1.2rem;
   padding: 10px;
 }
+
+
+.auth-toggle-button {
+  color: var(--ink);
+  font-weight: 700;
+  padding: 0;
+  border-radius: 0;
+}
