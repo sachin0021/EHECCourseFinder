@@ -318,3 +318,43 @@ main {
     align-self: stretch;
   }
 }
+
+.auth-screen {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+}
+
+.auth-card {
+  width: min(480px, 100%);
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: var(--card-shadow);
+  display: grid;
+  gap: 12px;
+}
+
+.auth-form {
+  display: grid;
+  gap: 8px;
+}
+
+.auth-form input {
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 12px;
+}
+
+.google-button {
+  display: inline-block;
+  text-align: center;
+  padding: 12px 16px;
+  border-radius: 10px;
+  text-decoration: none;
+  background: #0b57d0;
+  color: #fff;
+  font-weight: 600;
+}

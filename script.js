@@ -1,3 +1,10 @@
+const authScreen = document.getElementById("auth-screen");
+const appMain = document.getElementById("app-main");
+const authMessage = document.getElementById("auth-message");
+const loginForm = document.getElementById("login-form");
+const signupForm = document.getElementById("signup-form");
+const logoutButton = document.getElementById("logout-button");
+
 const courseGrid = document.getElementById("courses");
 const universitySearch = document.getElementById("university-search");
 const courseAreaSearch = document.getElementById("course-area-search");
@@ -283,6 +290,49 @@ const renderCourses = () => {
   emptyState.hidden = filteredCourses.length !== 0;
 };
 
+const updateAuthMessage = (message, isError = false) => {
+  authMessage.textContent = message;
+  authMessage.style.color = isError ? "#b42318" : "#475467";
+};
+
+const showApp = () => {
+  authScreen.hidden = true;
+  appMain.hidden = false;
+};
+
+const showAuth = () => {
+  authScreen.hidden = false;
+  appMain.hidden = true;
+};
+
+const checkAuth = async () => {
+  const response = await fetch("/auth/me");
+  if (!response.ok) {
+    showAuth();
+    return false;
+  }
+  showApp();
+  await loadCourses();
+  return true;
+};
+
+const submitAuthForm = async (url, payload) => {
+  const response = await fetch(url, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload),
+  });
+
+  const data = await response.json().catch(() => ({}));
+  if (!response.ok) {
+    updateAuthMessage(data.error || "Authentication failed.", true);
+    return;
+  }
+
+  updateAuthMessage("Authentication successful.");
+  await checkAuth();
+};
+
 const resetFilters = () => {
   universitySearch.value = "";
   courseAreaSearch.value = "";
@@ -326,4 +376,26 @@ const resetFilters = () => {
 
 resetButton.addEventListener("click", resetFilters);
 
-loadCourses();
+loginForm.addEventListener("submit", async (event) => {
+  event.preventDefault();
+  await submitAuthForm("/auth/login", {
+    email: document.getElementById("login-email").value,
+    password: document.getElementById("login-password").value,
+  });
+});
+
+signupForm.addEventListener("submit", async (event) => {
+  event.preventDefault();
+  await submitAuthForm("/auth/signup", {
+    name: document.getElementById("signup-name").value,
+    email: document.getElementById("signup-email").value,
+    password: document.getElementById("signup-password").value,
+  });
+});
+
+logoutButton.addEventListener("click", async () => {
+  await fetch("/auth/logout", { method: "POST" });
+  showAuth();
+});
+
+checkAuth();

@@ -48,7 +48,26 @@
       </section>
     </header>
 -->
-    <main>
+    <section id="auth-screen" class="auth-screen">
+      <div class="auth-card">
+        <h2>Login to Course Finder</h2>
+        <p id="auth-message">Use Google OAuth or email/password.</p>
+        <form id="login-form" class="auth-form">
+          <input id="login-email" type="email" placeholder="Email ID" required />
+          <input id="login-password" type="password" placeholder="Password" required />
+          <button type="submit" class="primary-button">Login</button>
+        </form>
+        <form id="signup-form" class="auth-form">
+          <input id="signup-name" type="text" placeholder="Full Name" required />
+          <input id="signup-email" type="email" placeholder="Email ID" required />
+          <input id="signup-password" type="password" placeholder="Password (min 6 chars)" required />
+          <button type="submit" class="secondary-button">Sign Up</button>
+        </form>
+        <a href="/auth/google" class="google-button">Continue with Google</a>
+      </div>
+    </section>
+
+    <main id="app-main" hidden>
       <section class="filters" aria-label="Course filters">
         <div class="filter-group">
           <label for="university-search">University Name</label>
@@ -112,6 +131,7 @@
       </section>
 
       <section class="results-header">
+        <button id="logout-button" class="secondary-button">Logout</button>
         <div>
           <h2>Available Courses</h2>
           <p id="results-count">Loading courses...</p>
