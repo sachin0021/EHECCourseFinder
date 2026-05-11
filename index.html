@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Italy Course Finder | Study in Italy</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+    />
+  </head>
+  <body>
+    <!--
+    <header class="site-header">
+      <nav class="nav-bar">
+        <div class="brand">
+          <img
+            class="brand-logo"
+            src="assets/isc-logo.svg"
+            alt="Italy Study Centre (ISC) logo"
+          />
+          <div>
+            <p class="brand-title">Italy Course Finder</p>
+            <p class="brand-subtitle">Premium pathways to Italian universities</p>
+          </div>
+        </div>
+        <button class="cta">Talk to an Advisor</button>
+      </nav>
+      <section class="hero">
+        <div class="hero-content">
+          <span class="hero-label">For the Students by the Students</span>
+          <h1>Find your perfect course in Italy.</h1>
+          <p>
+            Explore English-taught programs from leading Italian
+            universities. Filter by degree level, university, or course to
+            discover your next academic destination.
+          </p>
+        </div>
+        <div class="hero-card">
+          <h2>Quick Facts</h2>
+          <ul>
+            <li>Italy is home to 90+ internationally ranked universities.</li>
+            <li>Multiple intakes available across fall and spring.</li>
+            <li>Scholarships and tuition waivers for global applicants.</li>
+          </ul>
+        </div>
+      </section>
+    </header>
+-->
+    <main>
+      <section class="filters" aria-label="Course filters">
+        <div class="filter-group">
+          <label for="university-search">University Name</label>
+          <input
+            id="university-search"
+            list="university-options"
+            type="text"
+            placeholder="Search or select a university"
+            autocomplete="off"
+          />
+          <datalist id="university-options"></datalist>
+        </div>
+        <div class="filter-group">
+          <label for="course-area-search">Course Area</label>
+          <input
+            id="course-area-search"
+            list="course-area-options"
+            type="text"
+            placeholder="Search or select a course area"
+            autocomplete="off"
+          />
+          <datalist id="course-area-options"></datalist>
+        </div>
+        <div class="filter-group">
+          <label for="country-search">Country</label>
+          <input
+            id="country-search"
+            list="country-options"
+            type="text"
+            placeholder="Search or select a country"
+            autocomplete="off"
+          />
+          <datalist id="country-options"></datalist>
+        </div>
+        <div class="filter-group">
+          <label for="course-search">Course Name</label>
+          <input
+            id="course-search"
+            type="search"
+            placeholder="e.g. Architecture, Economics"
+          />
+        </div>
+        <div class="filter-group">
+          <label for="degree-filter">Degree Type</label>
+          <select id="degree-filter">
+            <option value="">All Degrees</option>
+            <option value="Masters">Masters</option>
+            <option value="PhD">PhD</option>
+            <option value="Bachelors">Bachelors</option>
+          </select>
+        </div>
+        <div class="filter-group">
+          <label for="sort-filter">Sort By</label>
+          <select id="sort-filter">
+            <option value="">Recommended</option>
+            <option value="university">University Name</option>
+            <option value="degree">Degree Type</option>
+          </select>
+        </div>
+        <button id="reset-filters" class="secondary-button">Reset Filters</button>
+      </section>
+
+      <section class="results-header">
+        <div>
+          <h2>Available Courses</h2>
+          <p id="results-count">Loading courses...</p>
+        </div>
+        <span class="accent-pill">Country: Italy</span>
+      </section>
+
+      <section id="courses" class="course-grid" aria-live="polite"></section>
+      <div id="empty-state" class="empty-state" hidden>
+        <h3>No courses found</h3>
+        <p>Try adjusting your filters to discover more programs.</p>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <p>
+        Made for future students of Italian universities. Explore, compare, and
+        apply with confidence.
+      </p>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
