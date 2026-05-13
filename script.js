@@ -315,7 +315,7 @@ const showAuth = () => {
 };
 
 const checkAuth = async () => {
-  const response = await fetch("/auth/me");
+  const response = await fetch("/auth/me", { cache: "no-store", credentials: "same-origin" });
   if (!response.ok) {
     showAuth();
     return false;
@@ -339,7 +339,7 @@ const submitAuthForm = async (url, payload) => {
   }
 
   updateAuthMessage("Authentication successful.");
-  await checkAuth();
+  window.location.href = "/";
 };
 
 const resetFilters = () => {

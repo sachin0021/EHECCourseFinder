@@ -10,6 +10,7 @@ import { fileURLToPath } from "url";
 dotenv.config();
 
 const app = express();
+app.set("etag", false);
 const PORT = process.env.PORT || 3000;
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -137,6 +138,7 @@ app.post("/auth/logout", (req, res) => {
 });
 
 app.get("/auth/me", (req, res) => {
+  res.set("Cache-Control", "no-store, no-cache, must-revalidate, private");
   if (!req.isAuthenticated()) return res.status(401).json({ error: "Unauthorized" });
   const { email, name, provider } = req.user;
   return res.json({ user: { email, name, provider } });
