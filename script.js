@@ -312,12 +312,16 @@ const clearAuthFields = () => {
 
 const showApp = () => {
   authScreen.hidden = true;
+  authScreen.style.display = "none";
   appMain.hidden = false;
+  appMain.style.display = "block";
 };
 
 const showAuth = () => {
   authScreen.hidden = false;
+  authScreen.style.display = "grid";
   appMain.hidden = true;
+  appMain.style.display = "none";
 };
 
 const checkAuth = async () => {
@@ -346,8 +350,10 @@ const submitAuthForm = async (url, payload) => {
 
   updateAuthMessage("Authentication successful.");
   clearAuthFields();
-  showApp();
-  await loadCourses();
+  const authenticated = await checkAuth();
+  if (!authenticated) {
+    updateAuthMessage("Session not established. Please try again.", true);
+  }
 };
 
 const resetFilters = () => {
