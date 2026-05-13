@@ -320,26 +320,26 @@ main {
 }
 
 .auth-screen {
-  min-height: 100vh;
+  min-height: calc(100vh - 96px);
   display: grid;
   place-items: center;
-  padding: 24px;
+  padding: 16px 20px;
 }
 
 .auth-card {
-  width: min(480px, 100%);
+  width: min(560px, 100%);
   background: #fff;
   border: 1px solid var(--border);
   border-radius: 16px;
-  padding: 24px;
+  padding: 18px 24px;
   box-shadow: var(--card-shadow);
   display: grid;
-  gap: 12px;
+  gap: 10px;
 }
 
 .auth-form {
   display: grid;
-  gap: 8px;
+  gap: 6px;
 }
 
 .auth-form input {
@@ -374,8 +374,8 @@ main {
 }
 
 .auth-logo {
-  width: 72px;
-  height: 72px;
+  width: 56px;
+  height: 56px;
   margin: 0 auto;
   border-radius: 999px;
   border: 6px solid #fff;
@@ -386,7 +386,7 @@ main {
 
 .auth-title {
   text-align: center;
-  font-size: 2rem;
+  font-size: 1.55rem;
 }
 
 .google-button {
@@ -415,11 +415,43 @@ main {
 
 .auth-submit {
   width: 100%;
-  padding: 12px;
+  padding: 10px;
   border-radius: 10px;
   border: 0;
   font-size: 2rem;
   font-weight: 600;
+}
+
+@media (max-width: 900px) {
+  .auth-screen {
+    min-height: calc(100vh - 72px);
+    padding: 14px 16px;
+  }
+
+  .auth-card {
+    width: min(620px, 100%);
+  }
+}
+
+@media (max-width: 640px) {
+  .auth-screen {
+    min-height: calc(100vh - 56px);
+    padding: 12px;
+  }
+
+  .auth-card {
+    width: 100%;
+    padding: 16px;
+    border-radius: 14px;
+  }
+
+  .auth-title {
+    font-size: 1.4rem;
+  }
+
+  .auth-divider {
+    gap: 8px;
+  }
 }
 
 .auth-toggle-text { color: #c3c7cf; }
