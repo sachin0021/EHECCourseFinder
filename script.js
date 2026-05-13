@@ -304,6 +304,12 @@ const updateAuthMessage = (message, isError = false) => {
   authMessage.style.color = isError ? "#b42318" : "#475467";
 };
 
+const clearAuthFields = () => {
+  authName.value = "";
+  authEmail.value = "";
+  authPassword.value = "";
+};
+
 const showApp = () => {
   authScreen.hidden = true;
   appMain.hidden = false;
@@ -339,7 +345,9 @@ const submitAuthForm = async (url, payload) => {
   }
 
   updateAuthMessage("Authentication successful.");
-  window.location.href = "/";
+  clearAuthFields();
+  showApp();
+  await loadCourses();
 };
 
 const resetFilters = () => {
@@ -399,6 +407,7 @@ const syncAuthModeUI = () => {
 
 authToggle.addEventListener("click", () => {
   authMode = authMode === "signin" ? "signup" : "signin";
+  clearAuthFields();
   updateAuthMessage("Use Google OAuth or email/password.");
   syncAuthModeUI();
 });
@@ -422,6 +431,7 @@ authForm.addEventListener("submit", async (event) => {
 
 logoutButton.addEventListener("click", async () => {
   await fetch("/auth/logout", { method: "POST" });
+  clearAuthFields();
   showAuth();
 });
 
