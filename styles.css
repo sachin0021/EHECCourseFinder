@@ -428,7 +428,6 @@ main {
 }
 
 .forgot-password-button {
-  justify-self: end;
   border: 0;
   background: transparent;
   color: #3a6adf;
@@ -436,6 +435,14 @@ main {
   font-weight: 600;
   cursor: pointer;
   padding: 0;
+}
+
+.auth-bottom-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
 }
 
 @media (max-width: 900px) {
@@ -531,4 +538,8 @@ main {
 
 .forgot-password-button:hover {
   text-decoration: underline;
+}
+
+.auth-toggle-text {
+  margin: 0;
 }

@@ -458,7 +458,7 @@ const syncAuthModeUI = () => {
 authToggle.addEventListener("click", () => {
   authMode = authMode === "signin" ? "signup" : "signin";
   clearAuthFields();
-  updateAuthMessage("Use your email and password to continue.");
+  updateAuthMessage("");
   syncAuthModeUI();
 });
 
