@@ -10,6 +10,7 @@ const authSubmit = document.getElementById("auth-submit");
 const authToggle = document.getElementById("auth-toggle");
 const authToggleLabel = document.getElementById("auth-toggle-label");
 const googleAuthButton = document.getElementById("google-auth-button");
+const forgotPasswordButton = document.getElementById("forgot-password-button");
 const logoutButton = document.getElementById("logout-button");
 
 let authMode = "signin";
@@ -310,6 +311,46 @@ const clearAuthFields = () => {
   authPassword.value = "";
 };
 
+const forgotPassword = async () => {
+  const email = String(authEmail.value || "").trim().toLowerCase();
+  if (!email) {
+    updateAuthMessage("Enter your email first, then click Forgot Password.", true);
+    return;
+  }
+
+  const newPassword = window.prompt("Enter your new password (minimum 6 characters):");
+  if (newPassword === null) {
+    return;
+  }
+
+  const password = String(newPassword).trim();
+  if (password.length < 6) {
+    updateAuthMessage("Password must be at least 6 characters.", true);
+    return;
+  }
+
+  try {
+    const response = await fetch("/auth/forgot-password", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email, newPassword: password }),
+    });
+
+    const payload = await response.json().catch(() => ({}));
+    if (!response.ok) {
+      updateAuthMessage(payload.error || "Failed to reset password.", true);
+      return;
+    }
+
+    updateAuthMessage("Password reset successful. Please sign in.");
+    authPassword.value = "";
+    authMode = "signin";
+    syncAuthModeUI();
+  } catch (_error) {
+    updateAuthMessage("Network error while resetting password.", true);
+  }
+};
+
 const showApp = () => {
   authScreen.hidden = true;
   authScreen.style.display = "none";
@@ -404,17 +445,20 @@ const syncAuthModeUI = () => {
   nameGroup.hidden = !isSignUp;
   authName.required = isSignUp;
   authSubmit.textContent = isSignUp ? "Sign up" : "Sign in";
-  googleAuthButton.textContent = isSignUp
-    ? "Sign up with google"
-    : "Sign in with google";
+  if (googleAuthButton) {
+    googleAuthButton.textContent = isSignUp
+      ? "Sign up with google"
+      : "Sign in with google";
+  }
   authToggleLabel.textContent = isSignUp ? "Already have an account?" : "No account?";
   authToggle.textContent = isSignUp ? "Sign in" : "Sign up";
+  forgotPasswordButton.hidden = isSignUp;
 };
 
 authToggle.addEventListener("click", () => {
   authMode = authMode === "signin" ? "signup" : "signin";
   clearAuthFields();
-  updateAuthMessage("Use Google OAuth or email/password.");
+  updateAuthMessage("Use your email and password to continue.");
   syncAuthModeUI();
 });
 
@@ -440,6 +484,8 @@ logoutButton.addEventListener("click", async () => {
   clearAuthFields();
   showAuth();
 });
+
+forgotPasswordButton.addEventListener("click", forgotPassword);
 
 syncAuthModeUI();
 checkAuth();

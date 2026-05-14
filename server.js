@@ -117,6 +117,27 @@ app.post("/auth/login", async (req, res) => {
   });
 });
 
+app.post("/auth/forgot-password", async (req, res) => {
+  const { email, newPassword } = req.body || {};
+  const normalizedEmail = String(email || "").trim().toLowerCase();
+  const password = String(newPassword || "");
+  const user = usersByEmail.get(normalizedEmail);
+
+  if (!user || user.provider !== "local") {
+    return res.status(404).json({ error: "No local account found for this email." });
+  }
+
+  if (password.length < 6) {
+    return res.status(400).json({ error: "New password must be at least 6 characters." });
+  }
+
+  user.passwordHash = await bcrypt.hash(password, 10);
+  usersByEmail.set(normalizedEmail, user);
+  usersById.set(user.id, user);
+
+  return res.json({ ok: true });
+});
+
 app.get("/auth/google", (req, res, next) => {
   if (!process.env.GOOGLE_CLIENT_ID || !process.env.GOOGLE_CLIENT_SECRET) {
     return res.status(500).send("Google OAuth is not configured on server.");

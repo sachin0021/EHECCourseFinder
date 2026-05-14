@@ -342,6 +342,11 @@ main {
   gap: 6px;
 }
 
+.auth-actions {
+  display: grid;
+  gap: 8px;
+}
+
 .auth-form input {
   border: 1px solid var(--border);
   border-radius: 10px;
@@ -420,6 +425,17 @@ main {
   border: 0;
   font-size: 2rem;
   font-weight: 600;
+}
+
+.forgot-password-button {
+  justify-self: end;
+  border: 0;
+  background: transparent;
+  color: #3a6adf;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0;
 }
 
 @media (max-width: 900px) {
@@ -511,4 +527,8 @@ main {
   font-weight: 700;
   padding: 0;
   border-radius: 0;
+}
+
+.forgot-password-button:hover {
+  text-decoration: underline;
 }

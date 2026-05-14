@@ -53,9 +53,8 @@
         <div class="auth-logo" aria-hidden="true">○</div>
         <h2 class="auth-title">EHEC</h2>
 
-        <a id="google-auth-button" href="/auth/google" class="google-button">Sign in with google</a>
-
-        <div class="auth-divider"><span>or</span></div>
+        <!-- <a id="google-auth-button" href="/auth/google" class="google-button">Sign in with google</a> -->
+        <!-- <div class="auth-divider"><span>or</span></div> -->
 
         <form id="auth-form" class="auth-form">
           <div id="name-group" class="auth-field" hidden>
@@ -73,10 +72,16 @@
             <input id="auth-password" type="password" placeholder="********" required />
           </div>
 
-          <button id="auth-submit" type="submit" class="auth-submit">Sign in</button>
+          <div class="auth-actions">
+            <button id="auth-submit" type="submit" class="auth-submit">Sign in</button>
+            <button id="forgot-password-button" type="button" class="forgot-password-button">
+              Forgot Password?
+            </button>
+          </div>
         </form>
 
-        <p id="auth-message">Use Google OAuth or email/password.</p>
+        <!-- <p id="auth-message">Use Google OAuth or email/password.</p> -->
+        <p id="auth-message">Use your email and password to continue.</p>
         <p class="auth-toggle-text">
           <span id="auth-toggle-label">No account?</span>
           <button id="auth-toggle" type="button" class="auth-toggle-button">Sign up</button>
